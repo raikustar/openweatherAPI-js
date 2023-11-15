@@ -111,7 +111,7 @@ function details(data) {
     }
     let weather_desc = data.weather[0].description
     changeElement(weather_desc.charAt(0).toUpperCase() + weather_desc.slice(1), desc)
-    changeElement(`Feels like: ${Math.round(data.main.feels_like) / 10}°C`, feelslike)
+    changeElement(`Feels like: ${Math.round(data.main.feels_like) - 273}°C`, feelslike)
 
     let cloudsText = `Cloud density: ${data.clouds.all}%` 
     changeElement(cloudsText, clouds)
@@ -127,7 +127,7 @@ function details(data) {
 function main(data) { 
     changeIcon(data, icon)
 
-    let tempText = `${Math.round(data.main.temp) / 10}°C`
+    let tempText = `${Math.round(data.main.temp) - 273}°C`
     changeElement(tempText, temp)
 
     changeElement(data.weather[0].main, weather)
@@ -146,14 +146,7 @@ function main(data) {
     
 }
 
-function sun(data, string, parent) {
-    
-    let dateUnix = new Date(data) 
-    let hours = dateUnix.getHours()
-    let minutes = dateUnix.getMinutes()
 
-    parent.textContent = `${string} ${hours}:${minutes}`
-}
 
 function changeIcon(data, parent) {
     clearResults(parent)
